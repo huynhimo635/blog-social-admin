@@ -15,6 +15,11 @@ module.exports = {
                 check: "url('/icons/check.svg')",
                 landscape: "url('/images/landscape/2.jpg')",
             }),
+            colors: {
+                main_color: "#9a55ff",
+                secondary_color: "#da8cff",
+                main_text: "#3e4b5b",
+            },
         },
     },
     variants: {
