@@ -5,17 +5,17 @@ import { Provider } from 'react-redux'
 
 import './styles/index.css'
 import App from './pages/App'
-import store from './store/store'
+import { store } from './store/store'
 
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </StrictMode>,
   document.getElementById('root')
 )

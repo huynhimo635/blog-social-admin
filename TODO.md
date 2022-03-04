@@ -1,10 +1,12 @@
 # Login
 
     - Login Form
+    - Register Form
+    - Forgot Password Form
 
 # Home
 
-    - Chart - static
+    - Chart - Static
     - Sidebar - Navbar
 
 # Product
