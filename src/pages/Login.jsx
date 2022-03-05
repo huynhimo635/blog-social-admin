@@ -55,12 +55,15 @@ function Login() {
                 </div>
                 <input
                   type="text"
-                  className="text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] border-main_color"
+                  // eslint-disable-next-line react/jsx-curly-brace-presence
+                  className={`text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] ${
+                    errors.username ? 'border-red-600' : 'border-main_color'
+                  }`}
                   autoFocus
                   required
                   {...register('username')}
                 />
-                <span>{errors && errors.username?.message}</span>
+                <p>{errors && errors.username?.message}</p>
               </div>
             </div>
             {/* Password field */}
@@ -74,11 +77,13 @@ function Login() {
                 </div>
                 <input
                   type="password"
-                  className="text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] border-main_color"
+                  className={`text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] ${
+                    errors.password ? 'border-red-600' : 'border-main_color'
+                  }`}
                   required
                   {...register('password')}
                 />
-                <span>{errors && errors.password?.message}</span>
+                <p>{errors && errors.password?.message}</p>
               </div>
             </div>
             {/* Forgot Password */}
