@@ -1,7 +1,5 @@
-// eslint-disable-next-line import/newline-after-import
-import SideBar from '../components/Common/SideBar'
 function DashBoard() {
-  return <SideBar />
+  return <h1>asdasd</h1>
 }
 
 export default DashBoard

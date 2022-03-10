@@ -1,18 +1,31 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import clsx from 'clsx'
 
 import { UilUser, UilKeySkeleton } from '@iconscout/react-unicons'
 import Logo from '../assets/images/avt.svg'
 import Banner from '../assets/images/login1.svg'
+// import Popup from '../components/Common/Popup'
+
+import authApi from '../api/auth'
+import { setLoading } from '../store/loadingSlice'
+import { setPopup } from '../store/popupSlice'
 
 function Login() {
-  const schema = yup.object().shape({
-    username: yup.string().min(6).max(20).required(),
-    password: yup.string().min(8).max(20).required()
-  })
+  const dispatch = useDispatch()
+  const popupStateSuccess = {
+    open: true,
+    success: true,
+    message: 'Sign In Success'
+  }
 
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required()
+  })
   const {
     register,
     handleSubmit,
@@ -22,13 +35,28 @@ function Login() {
     resolver: yupResolver(schema)
   })
 
-  const onSubmitHandler = (event, data) => {
-    console.log({ data })
-    reset()
+  const onSubmitHandler = async (frmData) => {
+    dispatch(setLoading(true))
+    try {
+      const { data } = await authApi.login(frmData)
+      const { accessToken, refreshToken } = data
+      localStorage.setItem('token', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      dispatch(setPopup(popupStateSuccess))
+      reset()
+    } catch (error) {
+      const popupState = {
+        open: true,
+        ...error.data
+      }
+      dispatch(setPopup(popupState))
+    }
+    dispatch(setLoading(false))
   }
 
   return (
-    <div className="h-[100vh] w-[100vw] bg-[#f2edf3]">
+    <div className={clsx('h-[100vh] w-[100vw]', 'bg-[#f2edf3]')}>
+      {/* <Popup /> */}
       <div className="absolute w-[77.5rem] bg-gradient-to-l from-secondary_color to-white h-[38.125rem] rounded-[32px] shadow-[1px_1px_5px_5px_rgba(154,85,255,0.1),-1px_-1px_5px_5px_rgba(154,85,255,0.1)] bg-[#ffffff] top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] flex justify-around">
         {/* Banner */}
         <div className="img flex w-[31.25rem]">
@@ -50,20 +78,20 @@ function Login() {
                 <div className="flex justify-start items-center">
                   <UilUser size={24} />
                   <label htmlFor="" className="text-[1.5rem] ml-3">
-                    Username
+                    Email
                   </label>
                 </div>
                 <input
                   type="text"
-                  // eslint-disable-next-line react/jsx-curly-brace-presence
-                  className={`text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] ${
-                    errors.username ? 'border-red-600' : 'border-main_color'
-                  }`}
+                  className={clsx(
+                    'text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] border-main_color',
+                    errors.email && 'border-red-600'
+                  )}
                   autoFocus
                   required
-                  {...register('username')}
+                  {...register('email')}
                 />
-                <p>{errors && errors.username?.message}</p>
+                <p>{errors && errors.email?.message}</p>
               </div>
             </div>
             {/* Password field */}
@@ -85,12 +113,6 @@ function Login() {
                 />
                 <p>{errors && errors.password?.message}</p>
               </div>
-            </div>
-            {/* Forgot Password */}
-            <div className="w-full flex justify-end items-center">
-              <Link to="/login" className="my-2 text-main_text  hover:underline">
-                Forgot Password
-              </Link>
             </div>
             {/* Login Button */}
             <button

@@ -1,16 +1,28 @@
-import Router from '../router/Router'
+import { If, Then, Else } from 'react-if'
 
-// import SideBar from '../components/Common/SideBar'
-// import Header from '../components/Common/Header'
-// import Footer from '../components/Common/Footer'
+import Router from '../router/Router'
+import Layout from '../components/Common/Layout'
+import Loading from '../components/Common/Loading'
+import Popup from '../components/Common/Popup'
 
 function App() {
+  const isLoggedIn =
+    Boolean(localStorage.getItem('token')) && localStorage.getItem('token') !== 'undefined'
   return (
     <>
-      {/* <Header /> */}
-      {/* <SideBar /> */}
-      <Router />
-      {/* <Footer /> */}
+      <If condition={isLoggedIn}>
+        <Then>
+          <Layout>
+            <Router />
+          </Layout>
+        </Then>
+        <Else>
+          <Router />
+        </Else>
+      </If>
+
+      <Loading />
+      <Popup />
     </>
   )
 }

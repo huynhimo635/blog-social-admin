@@ -1,13 +1,10 @@
 # Login
 
     - Login Form
-    - Register Form
-    - Forgot Password Form
 
 # Home
 
     - Chart - Static
-    - Sidebar - Navbar
 
 # Product
 
@@ -24,3 +21,8 @@
 # Tag
 
     - CRUD Tag
+
+# Common
+
+    - Sidebar
+    - Navbar
