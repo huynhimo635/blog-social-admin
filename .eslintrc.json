@@ -26,6 +26,7 @@
     "jsx-a11y/no-autofocus": "off",
     "import/no-unresolved": "off",
     "no-unused-vars": "warn",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }

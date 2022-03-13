@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -13,18 +13,21 @@ import Banner from '../assets/images/login1.svg'
 import authApi from '../api/auth'
 import { setLoading } from '../store/loadingSlice'
 import { setPopup } from '../store/popupSlice'
+import { checkAuth } from '../store/authSlice'
+
+const popupStateSuccess = {
+  open: true,
+  success: true,
+  message: 'Sign In Success'
+}
 
 function Login() {
   const dispatch = useDispatch()
-  const popupStateSuccess = {
-    open: true,
-    success: true,
-    message: 'Sign In Success'
-  }
+  const navigate = useNavigate()
 
   const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required()
+    email: yup.string().email('Email is invalid!').required('This field is required'),
+    password: yup.string().min(6).required('This field is required')
   })
   const {
     register,
@@ -42,8 +45,10 @@ function Login() {
       const { accessToken, refreshToken } = data
       localStorage.setItem('token', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
+      dispatch(checkAuth())
       dispatch(setPopup(popupStateSuccess))
       reset()
+      navigate('/')
     } catch (error) {
       const popupState = {
         open: true,

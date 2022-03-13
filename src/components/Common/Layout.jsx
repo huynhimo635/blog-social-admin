@@ -2,15 +2,14 @@ import SideBar from './SideBar'
 import Header from './Header'
 import Footer from './Footer'
 
-function Layout(props) {
-  const { children } = props
+function Layout({ children }) {
   return (
-    <>
+    <div>
       <Header />
       <SideBar />
-      {children}
+      <div className="p-10">{children}</div>
       <Footer />
-    </>
+    </div>
   )
 }
 
