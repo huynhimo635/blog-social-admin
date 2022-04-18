@@ -3,21 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
+  html {
+    font-size: 13;
+  }
+
   body {
     font-family: 'Roboto';
     font-weight: 500;
     max-width: 100vw;
     overflow-x: hidden;
-  }
-  .text-primary {
-  }
-  .text-secondary {
-  }
-  .primary-bg {
-  }
-  .secondary-bg {
-  }
-  .blue-custom {
+    background-color: '#000000';
   }
 }
 

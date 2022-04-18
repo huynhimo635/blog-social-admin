@@ -1,6 +1,6 @@
 import SideBar from './SideBar'
-import Header from './Header'
-import Footer from './Footer'
+import Header from '../App/Header'
+import Footer from '../App/Footer'
 
 function Layout({ children }) {
   return (

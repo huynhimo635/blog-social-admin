@@ -60,7 +60,7 @@ function Login() {
   }
 
   return (
-    <div className={clsx('h-[100vh] w-[100vw]', 'bg-[#f2edf3]')}>
+    <div className={clsx('h-[100vh] w-[100vw]')}>
       {/* <Popup /> */}
       <div className="absolute w-[77.5rem] bg-gradient-to-l from-secondary_color to-white h-[38.125rem] rounded-[32px] shadow-[1px_1px_5px_5px_rgba(154,85,255,0.1),-1px_-1px_5px_5px_rgba(154,85,255,0.1)] bg-[#ffffff] top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] flex justify-around">
         {/* Banner */}
