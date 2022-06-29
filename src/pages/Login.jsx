@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -11,6 +12,7 @@ import Banner from '../assets/images/login1.svg'
 // import Popup from '../components/Common/Popup'
 
 import authApi from '../api/auth'
+
 import { setLoading } from '../store/loadingSlice'
 import { setPopup } from '../store/popupSlice'
 import { checkAuth } from '../store/authSlice'
@@ -25,10 +27,19 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const isAuth = useSelector((state) => state.auth.value)
+  // check if user is authenticated, then navigate to dashboard
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/')
+    }
+  }, [isAuth])
+
   const schema = yup.object().shape({
     email: yup.string().email('Email is invalid!').required('This field is required'),
     password: yup.string().min(6).required('This field is required')
   })
+
   const {
     register,
     handleSubmit,
@@ -42,9 +53,9 @@ function Login() {
     dispatch(setLoading(true))
     try {
       const { data } = await authApi.login(frmData)
-      const { accessToken, refreshToken } = data
-      localStorage.setItem('token', accessToken)
-      localStorage.setItem('refreshToken', refreshToken)
+      const { access_token, refresh_token } = data
+      localStorage.setItem('token', access_token)
+      localStorage.setItem('refreshToken', refresh_token)
       dispatch(checkAuth())
       dispatch(setPopup(popupStateSuccess))
       reset()
@@ -60,7 +71,7 @@ function Login() {
   }
 
   return (
-    <div className={clsx('h-[100vh] w-[100vw]')}>
+    <div className={clsx('h-screen w-screen')}>
       {/* <Popup /> */}
       <div className="absolute w-[77.5rem] bg-gradient-to-l from-secondary_color to-white h-[38.125rem] rounded-[32px] shadow-[1px_1px_5px_5px_rgba(154,85,255,0.1),-1px_-1px_5px_5px_rgba(154,85,255,0.1)] bg-[#ffffff] top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] flex justify-around">
         {/* Banner */}
@@ -89,7 +100,7 @@ function Login() {
                 <input
                   type="text"
                   className={clsx(
-                    'text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] border-main_color',
+                    'text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[2px] rounded-md border-main_color',
                     errors.email && 'border-red-600'
                   )}
                   autoFocus
@@ -110,7 +121,7 @@ function Login() {
                 </div>
                 <input
                   type="password"
-                  className={`text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[3px] ${
+                  className={`text-[1.125rem] w-[100%] bg-transparent outline-0 left-0 top-0 mb-[12px] mt-[8px] border-b-[2px] rounded-md ${
                     errors.password ? 'border-red-600' : 'border-main_color'
                   }`}
                   required

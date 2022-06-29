@@ -17,7 +17,11 @@ module.exports = {
       colors: {
         main_color: '#9a55ff',
         secondary_color: '#da8cff',
-        main_text: '#3e4b5b'
+        main_text: '#566a7f',
+        secondary_text: '#697a8d',
+        main_bg: '#ffffff',
+        secondary_bg: '#ebebf7',
+        third_bg: '#f2f2f7'
       }
     }
   },

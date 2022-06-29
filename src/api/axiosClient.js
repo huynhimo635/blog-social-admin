@@ -25,7 +25,12 @@ axiosClient.interceptors.response.use(
   (error) => {
     // Handle errors
     const { response } = error
-    throw response
+    if (response && response.status === 401) {
+      // Redirect to login page
+      localStorage.removeItem('token')
+      window.location.href = '/login'
+    }
+    return Promise.reject(error.response)
   }
 )
 

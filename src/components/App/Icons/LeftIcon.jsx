@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 function LeftIcon() {
   return (
     <svg
