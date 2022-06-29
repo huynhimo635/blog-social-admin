@@ -4,13 +4,14 @@ import * as yup from 'yup'
 
 import { UilAlignCenterAlt } from '@iconscout/react-unicons'
 
-import Layout from '../components/Common/Layout'
+import ConfirmDialog from '../components/App/ConfirmDialog'
 import TextField from '../components/Form/TextField'
 import MultipleTextField from '../components/Form/MultipleTextField'
 import DropdownField from '../components/Form/DropdownField'
 import FileField from '../components/Form/FileField'
 import Button from '../components/Common/Button'
 import DataTable from '../components/Common/DataTable'
+import Card from '../components/Common/Card'
 
 function DashBoard() {
   const schema = yup.object().shape({
@@ -139,7 +140,7 @@ function DashBoard() {
   ]
 
   return (
-    <Layout>
+    <Card>
       <FormProvider {...testForm}>
         <TextField label="Category" name="category" placeholder="Text here..." required disabled />
         <TextField
@@ -178,7 +179,8 @@ function DashBoard() {
         test="test"
         search={{ placeholder: 'Text here...' }}
       />
-    </Layout>
+      {/* <ConfirmDialog /> */}
+    </Card>
   )
 }
 
