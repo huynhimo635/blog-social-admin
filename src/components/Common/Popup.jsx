@@ -21,7 +21,7 @@ function Popup() {
   return (
     <div
       className={clsx(
-        'absolute right-7 top-7 flex flex-row gap-2',
+        'absolute right-7 top-7 flex flex-row gap-2 z-50',
         popupState.success ? 'bg-green-600' : 'bg-red-600',
         'text-white font-semibold text-xl py-3 px-6 rounded-xl',
         popupState.open

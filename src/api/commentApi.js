@@ -1,9 +1,9 @@
 import axiosClient from './axiosClient'
 import { ENTITY } from '../utils/constant'
 
-const entity = ENTITY.user
+const entity = ENTITY.comment
 
-const userApi = {
+const commentApi = {
   getAll: () => {
     const endpoint = `/${entity}`
     return axiosClient.get(endpoint)
@@ -26,4 +26,4 @@ const userApi = {
   }
 }
 
-export default userApi
+export default commentApi

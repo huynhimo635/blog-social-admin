@@ -13,7 +13,7 @@ function DataTable(props) {
   const { module, search, rows, columns, editable, creatable, handleDelete, renderItem } = props
   const renderRow = (row, index) => {
     return (
-      <tr key={index} className="even:bg-main_color even:bg-opacity-10 odd:bg-white">
+      <tr key={index} className="even:bg-main_color even:bg-opacity-5 odd:bg-white">
         {columns.map((col) => {
           return (
             <td
@@ -50,11 +50,13 @@ function DataTable(props) {
   }
 
   return (
-    <div className="my-2 w-full bg-white border-2 rounded-lg h-full relative py-4 px-4">
+    <div className="my-2 w-full bg-white rounded-lg h-full relative py-4 px-4">
       <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
         <div className="flex flex-row items-center justify-start gap-4">
           {/* Title table */}
-          <h1 className="text-2xl leading-tight uppercase tracking-widest">{module}</h1>
+          <h1 className="text-2xl uppercase tracking-widest text-secondary_text font-bold">
+            {module}
+          </h1>
           {/* Search table */}
           <When condition={search !== null}>
             <form className="flex flex-row w-full max-w-sm space-x-3 space-y-0 justify-center">
@@ -89,7 +91,7 @@ function DataTable(props) {
       <div className="py-4 overflow-x-auto h-full">
         <If condition={_.size(rows) > 0 || _.size(columns) > 0}>
           <Then>
-            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 {/* Columns */}
                 <thead className="bg-main_color  text-white font-semibold">

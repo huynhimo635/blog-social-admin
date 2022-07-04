@@ -8,6 +8,7 @@ import User from '../pages/User'
 
 // Form
 import CategoryForm from '../pages/Form/CategoryForm'
+import UserForm from '../pages/Form/UserForm'
 
 function Router() {
   return (
@@ -23,8 +24,8 @@ function Router() {
         </Route>
 
         <Route path="user" element={<User />}>
-          {/* <Route path="create" element={<CategoryForm />} />
-          <Route path="edit/:id" element={<CategoryForm />} /> */}
+          <Route path="create" element={<UserForm />} />
+          <Route path="edit/:id" element={<UserForm />} />
         </Route>
       </Route>
     </Routes>

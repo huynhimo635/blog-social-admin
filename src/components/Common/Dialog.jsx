@@ -18,7 +18,7 @@ function Dialog({ children, onClose, title, buttons }) {
     <div className="w-screen h-screen bg-third_bg bg-opacity-80 absolute inset-0">
       <Card className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg px-0 py-0">
         <header className="flex justify-between items-center px-4 py-2">
-          <h1 className="text-xl uppercase">{title && title}</h1>
+          <h1 className="text-xl uppercase text-secondary_text">{title && title}</h1>
           <button
             className="absolute top-2 right-2 cursor-pointer"
             type="button"

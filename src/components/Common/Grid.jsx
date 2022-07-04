@@ -5,9 +5,11 @@ function Grid(props) {
   const { children, className, col, container, gap } = props
 
   return (
-    <If condition={container}>
+    <If condition={Boolean(container)}>
       <Then>
-        <div className={clsx('grid grid-cols-1 gap-4', gap && gap, className && className)}>
+        <div
+          className={clsx('grid grid-cols-12 gap-4', gap && `gap-${gap}`, className && className)}
+        >
           {children}
         </div>
       </Then>
